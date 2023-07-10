@@ -1,0 +1,140 @@
+version: '3.7'
+services:
+
+  book-mysql-db:
+    restart: always
+    container_name: book-mysql-db
+    image: 'mysql:8.0'
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./database/book_schema.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_ROOT_USERNAME --password=$$MYSQL_ROOT_PASSWORD
+      timeout: 2s
+      retries: 2
+
+  ms-book-springboot-rest-jdbc:
+    image: pt-book/book-springboot-rest-jdbc-service
+    container_name: ms-book-springboot-rest-jdbc
+    build:
+      context: ../ms-book-springboot-rest-jdbc
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9080:9080"
+    environment: 
+      - PROFILE=docker
+
+  ms-book-springboot-rest-hibernate:
+    image: pt-book/ms-book-springboot-rest-hibernate
+    container_name: ms-book-springboot-rest-hibernate
+    build:
+      context: ../ms-book-springboot-rest-hibernate
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9081:9081"
+    environment:
+      - PROFILE=docker
+
+  ms-book-springboot-reactive:
+    image: pt-book/ms-book-springboot-reactive
+    container_name: ms-book-springboot-reactive
+    build:
+      context: ../ms-book-springboot-reactive
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9082:9082"
+    environment:
+      - PROFILE=docker
+
+  ms-book-micronaut-rest-jdbc:
+    image: pt-book/ms-book-micronaut-rest-jdbc
+    container_name: ms-book-micronaut-rest-jdbc
+    build:
+      context: ../ms-book-micronaut-rest-jdbc
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9083:9083"
+    environment:
+      - PROFILE=docker
+
+  ms-book-micronaut-reactive:
+    image: pt-book/ms-book-micronaut-reactive
+    container_name: ms-book-micronaut-reactive
+    build:
+      context: ../ms-book-micronaut-reactive
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9084:9084"
+    environment:
+      - PROFILE=docker
+
+  ms-book-quarkus-rest-jdbc:
+    image: pt-book/ms-book-quarkus-rest-jdbc
+    container_name: ms-book-quarkus-rest-jdbc
+    build:
+      context: ../ms-book-quarkus-rest-jdbc
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9085:9085"
+    environment:
+      - PROFILE=docker
+
+  ms-book-quarkus-rest-hibernate:
+    image: pt-book/ms-book-quarkus-rest-hibernate
+    container_name: ms-book-quarkus-rest-hibernate
+    build:
+      context: ../ms-book-quarkus-rest-hibernate
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9086:9086"
+    environment:
+      - PROFILE=docker
+
+  ms-book-quarkus-reactive:
+    image: pt-book/ms-book-quarkus-reactive
+    container_name: ms-book-quarkus-reactive
+    build:
+      context: ../ms-book-quarkus-reactive
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "9087:9087"
+    environment:
+      - PROFILE=docker

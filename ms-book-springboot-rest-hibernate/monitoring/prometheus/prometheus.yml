@@ -1,0 +1,16 @@
+#global config
+global:
+  scrape_interval:     15s
+  evaluation_interval: 5s
+  scrape_timeout:     15s
+  #query_log_file: <string>
+  external_labels:
+    monitor: 'codelab-monitor'
+# Scrape configs only contain one scrape target
+scrape_configs:
+  - job_name: 'ms-book-springboot-rest-hibernate'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['ms-book-springboot-rest-hibernate:8080']

@@ -1,0 +1,40 @@
+micronaut:
+  server:
+    port: 8080
+  application:
+    name: book-micronaut-rest-jdbc
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+
+endpoints:
+  prometheus:
+    sensitive: false
+
+jackson:
+  bean-introspection-module: true
+
+datasources:
+  default:
+    url: jdbc:mysql://book-mysql-db:3306/performance-books
+    driverClassName: com.mysql.cj.jdbc.Driver
+    db-type: mysql
+    username: root
+    password: root
+    schema-generate: none
+    dialect: MYSQL
+    pooled: true
+    maximum-pool-size: 10
+    minimum-idle: 5
+    maximum-idle: 5
+    initial-size: 5
+
+
+netty:
+  default:
+    allocator:
+      max-order: 3

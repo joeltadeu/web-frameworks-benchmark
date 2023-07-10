@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+
+  book-mysql-db:
+    restart: always
+    container_name: book-mysql-db
+    image: 'mysql:8.0'
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ../book-database/src/main/resources/scripts/book_schema.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_ROOT_USERNAME --password=$$MYSQL_ROOT_PASSWORD
+      timeout: 2s
+      retries: 2
+
+  ms-book-quarkus-rest-hibernate:
+    image: pt-book/ms-book-quarkus-rest-hibernate
+    container_name: ms-book-quarkus-rest-hibernate
+    build:
+      context: ../ms-book-quarkus-rest-hibernate
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      - PROFILE=docker
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    links:
+      - ms-book-quarkus-rest-hibernate
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    user: "104"
+    volumes:
+      - ./monitoring/grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./monitoring/grafana/config.monitoring

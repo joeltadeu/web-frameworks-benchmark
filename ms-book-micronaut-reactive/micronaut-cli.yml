@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.performance
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [ annotation-api, app-name, data, data-r2dbc, h2, http-client, jackson-databind, java, java-application, junit, logback, lombok, maven, netty-server, r2dbc, reactor, reactor-http-client, readme, shade, vertx-mysql-client, yaml ]
