@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+
+  book-mysql-db:
+    restart: always
+    container_name: book-mysql-db
+    image: 'mysql:8.0'
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ../book-database/src/main/resources/scripts/book_schema.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_ROOT_USERNAME --password=$$MYSQL_ROOT_PASSWORD
+      timeout: 2s
+      retries: 2
+
+  ms-book-rust-diesel:
+    build:
+      context: ../ms-book-rust-diesel
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      book-mysql-db:
+        condition: service_healthy
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=debug
+      - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_PORT=8080
+      - DATABASE_URL=mysql://root:root@book-mysql-db:3306/performance-books
+    ports:
+      - "8080:8080"

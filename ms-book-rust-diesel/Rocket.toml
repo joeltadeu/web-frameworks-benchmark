@@ -1,0 +1,2 @@
+[global.databases.ms-book-rust-diesel]
+url = "mysql://root:root@book-mysql-db:3306/performance-books"
