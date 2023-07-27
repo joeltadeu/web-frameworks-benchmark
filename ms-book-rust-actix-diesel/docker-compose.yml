@@ -20,19 +20,19 @@ services:
       timeout: 2s
       retries: 2
 
-  ms-book-rust-diesel:
+  ms-book-rust-actix-diesel:
     build:
-      context: ../ms-book-rust-diesel
+      context: ../ms-book-rust-actix-diesel
       dockerfile: Dockerfile
     restart: on-failure
     depends_on:
       book-mysql-db:
         condition: service_healthy
     environment:
+      - RUST_LOG=rest_api=info,actix=info
       - RUST_BACKTRACE=1
-      - RUST_LOG=debug
-      - ROCKET_ADDRESS=0.0.0.0
-      - ROCKET_PORT=8080
+      - HOST=0.0.0.0
+      - PORT=8080
       - DATABASE_URL=mysql://root:root@book-mysql-db:3306/performance-books
     ports:
       - "8080:8080"

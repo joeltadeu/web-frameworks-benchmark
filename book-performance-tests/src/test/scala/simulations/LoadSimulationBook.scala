@@ -35,7 +35,7 @@ class LoadSimulationBook extends Simulation {
     .exec(getAllBooks());
 
   setUp(scn.inject(
-    rampConcurrentUsers(0) to (500) during (60 seconds),
-    constantConcurrentUsers(500) during (10 minutes))
+    rampConcurrentUsers(0) to (100) during (60 seconds),
+    constantConcurrentUsers(100) during (10 minutes))
     .protocols(httpConf))
 }

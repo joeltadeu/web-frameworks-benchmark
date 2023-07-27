@@ -16,19 +16,19 @@ RUN set -eux; \
     cargo --version; \
     rustc --version;
 
-RUN USER=root cargo new --bin ms-book-rust-diesel
-WORKDIR /ms-book-rust-diesel
+RUN USER=root cargo new --bin ms-book-rust-rocket-diesel
+WORKDIR /ms-book-rust-rocket-diesel
 COPY ./Cargo.toml ./Cargo.toml
 RUN cargo build
 
 RUN rm src/*.rs
 COPY ./src ./src
 COPY ./diesel.toml ./diesel.toml
-RUN rm ./target/debug/deps/ms_book_rust_diesel*
-RUN cargo build
+RUN rm ./target/debug/deps/ms_book_rust_rocket_diesel*
+RUN cargo build -v
 
 FROM buildpack-deps:stretch
 
-COPY --from=builder /ms-book-rust-diesel/target/debug/ms-book-rust-diesel /app/
+COPY --from=builder /ms-book-rust-rocket-diesel/target/debug/ms-book-rust-rocket-diesel /app/
 
-ENTRYPOINT [ "/app/ms-book-rust-diesel" ]
+ENTRYPOINT [ "/app/ms-book-rust-rocket-diesel" ]
