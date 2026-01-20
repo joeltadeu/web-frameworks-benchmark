@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
 
   book-mysql-db:
@@ -21,7 +19,7 @@ services:
       retries: 2
 
   ms-book-springboot-rest-jdbc:
-    image: pt-book/ms-book-springboot-rest-jdbc
+    image: joeltadeu/ms-book-springboot-rest-jdbc
     container_name: ms-book-springboot-rest-jdbc
     build:
       context: ../ms-book-springboot-rest-jdbc

@@ -20,7 +20,7 @@ services:
       retries: 2
 
   ms-book-quarkus-rest-jdbc:
-    image: pt-book/ms-book-quarkus-rest-jdbc
+    image: joeltadeu/ms-book-quarkus-rest-jdbc
     container_name: ms-book-quarkus-rest-jdbc
     build:
       context: ../ms-book-quarkus-rest-jdbc

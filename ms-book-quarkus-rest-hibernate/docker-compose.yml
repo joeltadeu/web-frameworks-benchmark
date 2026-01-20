@@ -1,4 +1,3 @@
-version: '3.7'
 services:
 
   book-mysql-db:
@@ -20,7 +19,7 @@ services:
       retries: 2
 
   ms-book-quarkus-rest-hibernate:
-    image: pt-book/ms-book-quarkus-rest-hibernate
+    image: joeltadeu/ms-book-quarkus-rest-hibernate
     container_name: ms-book-quarkus-rest-hibernate
     build:
       context: ../ms-book-quarkus-rest-hibernate

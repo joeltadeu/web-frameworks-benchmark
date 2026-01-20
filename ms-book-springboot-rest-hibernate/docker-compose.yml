@@ -1,4 +1,3 @@
-version: '3.7'
 services:
 
   book-mysql-db:
@@ -20,7 +19,7 @@ services:
       retries: 2
 
   ms-book-springboot-rest-hibernate:
-    image: pt-book/ms-book-springboot-rest-hibernate
+    image: joeltadeu/ms-book-springboot-rest-hibernate
     container_name: ms-book-springboot-rest-hibernate
     build:
       context: ../ms-book-springboot-rest-hibernate

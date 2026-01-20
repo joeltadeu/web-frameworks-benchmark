@@ -1,2 +1,16 @@
 /ms-book-rust-rocket-diesel/target/
 /ms-book-rust-diesel/sql/
+/out/
+/.idea/
+/ms-book-helidon-rest-jdbc/sql
+/ms-book-micronaut-reactive/sql
+/ms-book-micronaut-rest-jdbc/sql
+/ms-book-quarkus-reactive/sql
+/ms-book-quarkus-rest-hibernate/sql
+/ms-book-quarkus-rest-jdbc/sql
+/ms-book-springboot-reactive/sql
+/ms-book-springboot-rest-hibernate/sql
+/ms-book-springboot-rest-jdbc/sql
+/ms-book-springboot-virtual-threads/sql
+/ms-book-springboot-virtual-threads/target
+/ms-book-java-without-framework/target

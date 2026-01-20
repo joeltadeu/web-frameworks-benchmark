@@ -20,7 +20,7 @@ services:
       retries: 2
 
   ms-book-quarkus-reactive:
-    image: pt-book/ms-book-quarkus-reactive
+    image: joeltadeu/ms-book-quarkus-reactive
     container_name: ms-book-quarkus-reactive
     build:
       context: ../ms-book-quarkus-reactive

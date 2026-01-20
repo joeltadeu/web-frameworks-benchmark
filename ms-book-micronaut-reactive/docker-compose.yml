@@ -1,4 +1,3 @@
-version: '3.7'
 services:
 
   book-mysql-db:
@@ -20,7 +19,7 @@ services:
       retries: 2
 
   ms-book-micronaut-reactive:
-    image: pt-book/ms-book-micronaut-reactive
+    image: joeltadeu/ms-book-micronaut-reactive
     container_name: ms-book-micronaut-reactive
     build:
       context: ../ms-book-micronaut-reactive

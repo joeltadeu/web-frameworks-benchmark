@@ -9,19 +9,19 @@ It was also possible to carry out an extensive performance test using the Gatlin
 
 Below is the list of created microservices:
 
-| Microservice                                                           | Language |   Framework   | Persistence      |
-|------------------------------------------------------------------------|:---------|:-------------:|------------------|
-| [ms-book-micronaut-reactive](ms-book-micronaut-reactive)               | Java     |   Micronaut   | Reactive         |
-| [ms-book-micronaut-rest-jdbc](ms-book-micronaut-rest-jdbc)             | Java     |   Micronaut   | JDBC             |
-| [ms-book-quarkus-reactive](ms-book-quarkus-reactive)                   | Java     |    Quarkus    | Reactive         |
-| [ms-book-quarkus-rest-hibernate](ms-book-quarkus-rest-hibernate)       | Java     |    Quarkus    | Hibernate        |
-| [ms-book-quarkus-rest-jdbc](ms-book-quarkus-rest-jdbc)                 | Java     |    Quarkus    | JDBC             |
-| [ms-book-springboot-reactive](ms-book-springboot-reactive)             | Java     |  Spring Boot  | Reactive         |
-| [ms-book-springboot-rest-hibernate](ms-book-springboot-rest-hibernate) | Java     |  Spring Boot  | Hibernate        |
-| [ms-book-springboot-rest-jdbc](ms-book-springboot-rest-jdbc)           | Java     |  Spring Boot  | JDBC             |
-| [ms-book-dotnet-entity-framework](ms-book-dotnet-entity-framework)     | C#       | .Net/API Core | Entity Framework |
-| [ms-book-rust-actix-diesel](ms-book-rust-actix-diesel)                 | Rust     |     Actix     | Diesel           |
-| [ms-book-rust-rocket-diesel](ms-book-rust-rocket-diesel)               | Rust     |    Rocket     | Diesel           |
+| Microservice                                                                  | Language        |   Framework   | Persistence      |
+|-------------------------------------------------------------------------------|:----------------|:-------------:|------------------|
+| [ms-book-micronaut-reactive](ms-book-micronaut-reactive)                      | Java            |   Micronaut   | Reactive         |
+| [ms-book-micronaut-rest-jdbc](ms-book-micronaut-rest-jdbc)                    | Java            |   Micronaut   | JDBC             |
+| [ms-book-quarkus-reactive](ms-book-quarkus-reactive)                          | Java            |    Quarkus    | Reactive         |
+| [ms-book-quarkus-rest-hibernate](ms-book-quarkus-rest-hibernate)              | Java            |    Quarkus    | Hibernate        |
+| [ms-book-quarkus-rest-jdbc](ms-book-quarkus-rest-jdbc)                        | Java            |    Quarkus    | JDBC             |
+| [ms-book-springboot-reactive](ms-book-springboot-reactive)                    | Java            |  Spring Boot  | Reactive         |
+| [ms-book-springboot-rest-hibernate](ms-book-springboot-rest-hibernate)        | Java            |  Spring Boot  | Hibernate        |
+| [ms-book-springboot-rest-jdbc](ms-book-springboot-rest-jdbc)                  | Java            |  Spring Boot  | JDBC             |
+| [ms-book-dotnet-entity-framework](ms-book-dotnet-entity-framework)            | C#              | .Net/API Core | Entity Framework |
+| [ms-book-rust-actix-diesel](ms-book-rust-actix-diesel)                        | Rust            |     Actix     | Diesel           |
+| [ms-book-rust-rocket-diesel](ms-book-rust-rocket-diesel)                      | Rust            |    Rocket     | Diesel           |
 
 Each project has its own docker-compose and can run independently.
 

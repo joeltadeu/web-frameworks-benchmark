@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  host: 0.0.0.0
+app:
+    greeting: "Hello"
+db:
+  source: jdbc
+  connection:
+    url: jdbc:mysql://localhost:3306/performance-books?useSSL=false
+    username: root
+    password: root
+    initializationFailTimeout: -1
+    connectionTimeout: 2000
+  health-check:
+    type: "query"
+    statementName: "health-check"
+  statements:
+    select-all-books: "SELECT id, title, isbn, language_id, num_pages, publication_date, publisher_id FROM book"
+    select-book-by-id: "SELECT id, title, isbn, language_id, num_pages, publication_date, publisher_id FROM book WHERE id = :id"
+

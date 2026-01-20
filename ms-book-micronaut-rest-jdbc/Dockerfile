@@ -1,12 +1,19 @@
-FROM maven:3.8.5-openjdk-17 AS builder
-COPY pom.xml /tmp/
-COPY src /tmp/src/
-WORKDIR /tmp/
+FROM maven:3.9.12-eclipse-temurin-25-alpine AS builder
 
-RUN mvn -DskipTests package
+WORKDIR /tmp
 
-FROM openjdk:17-alpine3.14
-COPY --from=builder /tmp/target/ms-book-*.jar /app/app.jar
+# Copy dependency descriptor first to leverage Docker layer caching
+COPY pom.xml ./
+
+# Copy source code
+COPY src ./src/
+
+# Build with optimizations
+RUN mvn clean package -DskipTests -B
+
+FROM gcr.io/distroless/java25-debian13 AS runtime
+
+COPY --from=builder /tmp/target/ms-book*.jar /app/app.jar
 
 ARG PROFILE
 

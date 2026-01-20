@@ -1,4 +1,3 @@
-version: '3.7'
 services:
 
   book-mysql-db:
@@ -20,7 +19,7 @@ services:
       retries: 2
 
   ms-book-springboot-reactive:
-    image: pt-book/ms-book-springboot-reactive
+    image: joeltadeu/ms-book-springboot-reactive
     container_name: ms-book-springboot-reactive
     build:
       context: ../ms-book-springboot-reactive
